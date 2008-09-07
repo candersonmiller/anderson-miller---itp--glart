@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "ofAddons.h"
+#include "math.h"
 
 class testApp : public ofSimpleApp{
 	
@@ -20,6 +21,11 @@ class testApp : public ofSimpleApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased();
 		
+	private: 
+		float vert[3][2];
+		float rgb[3];
+		int lastColor;	
+		bool up;
 		
 };
 
