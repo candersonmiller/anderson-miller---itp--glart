@@ -17,6 +17,7 @@ void testApp::setup(){
 	}
 	lastColor = 0;
 	up = true;
+	counter = 0;
 }
 
 //--------------------------------------------------------------
@@ -29,7 +30,7 @@ void testApp::update(){
 	}
 	
 	if(rgb[0] < 0.98 && rgb[1] < 0.98 && rgb[2] < 0.98 && up){
-		rgb[lastColor] += 0.01;
+		rgb[lastColor] += 0.001;
 	}else{
 		//up = false;
 		for(int p = 0; p < 3; p++){
@@ -43,8 +44,11 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	
-	
+	counter += 0.001;
+
+	if(counter > 180){
+		counter = 0;
+	}
 	
 	float x = 0;
 	float y = 0;
@@ -60,7 +64,8 @@ void testApp::draw(){
 				}else{
 					y = vert[i][j];
 					x = x + (250 * k);
-					x = x + (  100 * sin(ceil(ofGetElapsedTimeMillis()/200)) );
+					x = x + (  100 * sin(counter) );
+					y = y + ( 100 * sin(counter * 10) );
 
 					//y = y + (y * 1.6);
 					glVertex2f(x,y);

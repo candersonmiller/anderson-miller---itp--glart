@@ -26,6 +26,7 @@ class testApp : public ofSimpleApp{
 		float rgb[3];
 		int lastColor;	
 		bool up;
+		float counter;
 		
 };
 
