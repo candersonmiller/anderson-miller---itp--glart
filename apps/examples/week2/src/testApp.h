@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "ofAddons.h"
+#include "vertex.h"
 
 class testApp : public ofSimpleApp{
 	
@@ -19,6 +20,9 @@ class testApp : public ofSimpleApp{
 		void mouseDragged(int x, int y, int button);
 		void mousePressed(int x, int y, int button);
 		void mouseReleased();
+	
+	private:
+		vertex center;
 		
 		
 };
