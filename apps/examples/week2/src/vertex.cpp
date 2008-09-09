@@ -12,12 +12,13 @@
 vertex::vertex(){
 	X = 0.0f;
 	Y = 0.0f;
-	
+	setAnchor(vertex(X,Y));
 }
 
 vertex::vertex(float x, float y){
 	X = (float)x;
 	Y = (float)y;
+	//setAnchor(vertex(X,Y));
 }
 
 vertex::~vertex(){

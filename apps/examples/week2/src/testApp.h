@@ -23,6 +23,8 @@ class testApp : public ofSimpleApp{
 	
 	private:
 		vertex center;
+		vertex top;
+		float counter;
 		
 		
 };
