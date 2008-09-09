@@ -8,7 +8,7 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	printf("X: %f  Y: %f",center.getX(), center.getY());
+	printf("X: %f  Y: %f\n",center.getX(), center.getY());
 }
 
 //--------------------------------------------------------------

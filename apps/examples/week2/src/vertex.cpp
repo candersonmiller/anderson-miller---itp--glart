@@ -12,12 +12,6 @@
 vertex::vertex(){
 	X = 0.0f;
 	Y = 0.0f;
-	translating = false;
-	rotating = false;
-	startTimer = 0;
-	startTimet = 0;
-	timeFramet = 0;
-	timeFramer = 0;
 	
 }
 
@@ -58,14 +52,6 @@ void vertex::translate(float xAmt, float yAmt){
 	
 	X = getX() + xAmt;
 	Y = getY() + yAmt;
-}
-
-bool vertex::isMoving(){
-	if(rotating || translating){
-		return true;
-	}else{
-		return false;
-	}
 }
 
 
