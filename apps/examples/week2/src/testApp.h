@@ -22,9 +22,7 @@ class testApp : public ofSimpleApp{
 		void mouseReleased();
 	
 	private:
-		vertex center;
-		vertex top;
-		float counter;
+
 		
 		
 };
