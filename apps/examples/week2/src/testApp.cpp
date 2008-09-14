@@ -10,12 +10,12 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	counter += 0.5;
+	counter += 0.25;
 	if(counter > 360){
 		counter = 0;
 	}
 	
-	counter1 += 1;
+	counter1 += 0.5;
 	if(counter1 > 360){
 		counter1 = 0;
 	}
@@ -33,9 +33,10 @@ void testApp::draw(){
 	//Sun
 	glPushMatrix();
 	glTranslated(-225,0,0);
+	glRotatef(counter,0,1,0);
 	glColor3f(0.9,0.9,0.00);
-	glutSolidSphere(150,50,50);
-	
+	//glutSolidSphere(150,50,50);	
+	glutSolidCube(150);
 	
 	//Mars
 	glPopMatrix();
@@ -43,15 +44,18 @@ void testApp::draw(){
 	glColor3f(0.7, 0.2 ,0);
 	glRotatef(counter, -0.3f, 1.0f,0);
 	glTranslated(100,100,0); //away from "origin"
-	glutSolidSphere(50,50,50);
+	//glutSolidSphere(50,50,50);
+	glRotatef(counter,0,1,0);
+	glutSolidCube(50);
 	
 	//Mars Moon
 	glPushMatrix();
 	glTranslated(-60,0,0);
 	glRotatef(counter1, 0.1f, 1.0f, 0);
 	glColor3f(1.0, 1.0,1.0);
-	glutSolidSphere(10,50,50);
-	
+	//glutSolidSphere(10,50,50);
+	glRotatef(counter,0,1,0);
+	glutSolidCube(10);
 	
 	
 	glPopMatrix();
@@ -60,17 +64,9 @@ void testApp::draw(){
 	glTranslated(-200,0,0);
 	glRotatef(counter1 , 0.0f, 1.0f, 0.0f);
 	glTranslated(-400,-20,0);
-	//glTranslated(-500 ,0,0);
-	
-	glutSolidSphere(60,50,50);
-	//glLoadIdentity();
-	//glPopMatrix();
-	//glPopMatrix();
-	//
-	//glRotatef(counter1, 0.3f, 0.9f,0);
-	//
-	
-	
+	//glutSolidSphere(60,50,50);
+	glRotatef(counter,0,1,0);
+	glutSolidCube(60);
 
 	/*glLoadIdentity();
 	glTranslated(400,400,-100);
