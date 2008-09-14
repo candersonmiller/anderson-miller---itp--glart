@@ -23,7 +23,7 @@ class testApp : public ofSimpleApp{
 	
 	private:
 		float counter;
-		
+		float counter1;
 		
 };
 

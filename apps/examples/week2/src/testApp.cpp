@@ -4,6 +4,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){	 
 	counter = 0;
+	counter1 = 0;
+	glEnable(GL_DEPTH_TEST);
 }
 
 //--------------------------------------------------------------
@@ -12,37 +14,64 @@ void testApp::update(){
 	if(counter > 360){
 		counter = 0;
 	}
+	
+	counter1 += 1;
+	if(counter1 > 360){
+		counter1 = 0;
+	}
+	 
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){	
 	glMatrixMode(GL_PROJECTION);
-	//glLoadIdentity();
-	glEnable(GL_DEPTH_TEST);
-	//Mars
-	//glLoadIdentity();
 	
-	glTranslated(700,-300,-100);
 	
+	glTranslated(700,-300,-500); //origin point
+	
+	
+	//Sun
 	glPushMatrix();
 	glTranslated(-225,0,0);
 	glColor3f(0.9,0.9,0.00);
 	glutSolidSphere(150,50,50);
 	
+	
+	//Mars
 	glPopMatrix();
+	glPushMatrix();
 	glColor3f(0.7, 0.2 ,0);
-
 	glRotatef(counter, -0.3f, 1.0f,0);
 	glTranslated(100,100,0); //away from "origin"
-	glutSolidSphere(50,100,100);
+	glutSolidSphere(50,50,50);
 	
+	//Mars Moon
+	glPushMatrix();
+	glTranslated(-60,0,0);
+	glRotatef(counter1, 0.1f, 1.0f, 0);
+	glColor3f(1.0, 1.0,1.0);
+	glutSolidSphere(10,50,50);
+	
+	
+	
+	glPopMatrix();
+	glPopMatrix();
+	glColor3f(0,0.6,0);
+	glTranslated(-200,0,0);
+	glRotatef(counter1 , 0.0f, 1.0f, 0.0f);
+	glTranslated(-400,-20,0);
+	//glTranslated(-500 ,0,0);
+	
+	glutSolidSphere(60,50,50);
+	//glLoadIdentity();
 	//glPopMatrix();
-	//glColor3f(1,1,1);
-	//glTranslated(-50,0,0);
-	//glRotatef(counter-20, 0, 1.0f, 0);
-	//glutSolidSphere(30,40,40);
+	//glPopMatrix();
+	//
+	//glRotatef(counter1, 0.3f, 0.9f,0);
+	//
 	
 	
+
 	/*glLoadIdentity();
 	glTranslated(400,400,-100);
 	glColor3f(0.7, 0.2 ,0);
