@@ -22,7 +22,7 @@ class testApp : public ofSimpleApp{
 		void mouseReleased();
 	
 	private:
-
+		float counter;
 		
 		
 };
