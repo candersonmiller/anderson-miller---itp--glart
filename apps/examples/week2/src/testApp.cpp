@@ -58,6 +58,7 @@ void testApp::draw(){
 	glutSolidCube(10);
 	
 	
+	//Earth
 	glPopMatrix();
 	glPopMatrix();
 	glColor3f(0,0.6,0);
@@ -68,20 +69,7 @@ void testApp::draw(){
 	glRotatef(counter,0,1,0);
 	glutSolidCube(60);
 
-	/*glLoadIdentity();
-	glTranslated(400,400,-100);
-	glColor3f(0.7, 0.2 ,0);
-	glRotatef(counter, -0.3f, 1.0f, 0);
-	glTranslated(400,0, -100);
-	glutSolidSphere(50,100,100);
-	
-	//Sun
-	glLoadIdentity();
-	glColor3f(0.9,0.9,0.00);
-	glTranslated(400,400,-300);
-	glRotatef(counter, 0.0f,1.0f,0.0f);
-	glutSolidSphere(200,50,50);*/
-	
+
 
 	
 	
