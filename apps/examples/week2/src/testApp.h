@@ -4,7 +4,6 @@
 
 #include "ofMain.h"
 #include "ofAddons.h"
-#include "vertex.h"
 
 class testApp : public ofSimpleApp{
 	
