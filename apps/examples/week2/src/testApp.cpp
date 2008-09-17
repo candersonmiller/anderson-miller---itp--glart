@@ -25,18 +25,17 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){	
 	glMatrixMode(GL_PROJECTION);
-	
+	gluPerspective(45.0, ofGetScreenWidth()/ofGetScreenHeight(), 10.0, -10.0);
 	
 	glTranslated(700,-300,-500); //origin point
-	
-	
+		
 	//Sun
 	glPushMatrix();
 	glTranslated(-225,0,0);
 	glRotatef(counter,0,1,0);
 	glColor3f(0.9,0.9,0.00);
-	//glutSolidSphere(150,50,50);	
-	glutSolidCube(150);
+	glutSolidSphere(150,50,50);	
+	//glutSolidCube(150);
 	
 	//Mars
 	glPopMatrix();
@@ -44,18 +43,18 @@ void testApp::draw(){
 	glColor3f(0.7, 0.2 ,0);
 	glRotatef(counter, -0.3f, 1.0f,0);
 	glTranslated(100,100,0); //away from "origin"
-	//glutSolidSphere(50,50,50);
 	glRotatef(counter,0,1,0);
-	glutSolidCube(50);
+	glutSolidSphere(50,50,50);
+	//glutSolidCube(50);
 	
 	//Mars Moon
 	glPushMatrix();
 	glTranslated(-60,0,0);
 	glRotatef(counter1, 0.1f, 1.0f, 0);
 	glColor3f(1.0, 1.0,1.0);
-	//glutSolidSphere(10,50,50);
 	glRotatef(counter,0,1,0);
-	glutSolidCube(10);
+	glutSolidSphere(10,50,50);
+	//glutSolidCube(10);
 	
 	
 	//Earth
@@ -65,10 +64,9 @@ void testApp::draw(){
 	glTranslated(-200,0,0);
 	glRotatef(counter1 , 0.0f, 1.0f, 0.0f);
 	glTranslated(-400,-20,0);
-	//glutSolidSphere(60,50,50);
 	glRotatef(counter,0,1,0);
-	glutSolidCube(60);
-
+	//glutSolidCube(60);
+	glutSolidSphere(60,50,50);
 
 
 	
