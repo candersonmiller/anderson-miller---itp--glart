@@ -4,6 +4,7 @@
 //--------------------------------------------------------------
 void testApp::setup(){	 
 	counter = 0;
+	counter2 = 0;
 }
 
 //--------------------------------------------------------------
@@ -12,17 +13,21 @@ void testApp::update(){
 	if(counter > 360){
 		counter = 0;
 	}
+	counter2 += 0.0001;
+	if(counter2 > 1){
+		counter2 = 0;
+	}
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	glTranslated(000,000, -1500);
 	glPushMatrix();
-	
-	//glTranslated(100, 50, 0);
-	//flower(0,0);
+
 	for(int j = 0; j < 5; j++){
 		glTranslated(0,120,0);
 		for(int i = 0; i < 10; i++){
+			glRotated(cos(counter2 * pi) * 360, 1, 1, 1);
 			glTranslated(120,0,0);
 			flower(0,0);
 		}

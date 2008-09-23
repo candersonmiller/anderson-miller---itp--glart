@@ -23,6 +23,7 @@ class testApp : public ofSimpleApp{
 	void flower(float startx, float starty);
 	private:
 		float counter;
+		float counter2;
 };
 
 #endif
