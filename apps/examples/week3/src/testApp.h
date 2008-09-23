@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "ofAddons.h"
+#include "math.h"
 
 class testApp : public ofSimpleApp{
 	
@@ -24,6 +25,7 @@ class testApp : public ofSimpleApp{
 	private:
 		float counter;
 		float counter2;
+	float rotation;
 };
 
 #endif

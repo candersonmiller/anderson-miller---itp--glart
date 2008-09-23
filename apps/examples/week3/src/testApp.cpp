@@ -5,6 +5,7 @@
 void testApp::setup(){	 
 	counter = 0;
 	counter2 = 0;
+	rotation = 0;
 }
 
 //--------------------------------------------------------------
@@ -21,7 +22,19 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-	
+
+/*	glOrtho(
+				 -0, 2.660,       //X: left side, right side
+				 -0, 2.0,   //Y: bottom, top
+				 -5, 5        //Z: near, far
+				 );
+*/	
+/*	glOrtho(
+			0, 4,        //X: left side, right side
+			0, 3,   	   //Y: bottom, top
+			-5, 5        //Z: near, far
+			);
+*/
 	glTranslated(000,000, -1500);
 	glPushMatrix();
 
@@ -36,17 +49,10 @@ void testApp::draw(){
 	}
 
 
-
-	//	glScaled(5,10,0);
-
-//	glRotated(20.0, 0, 0, 1.0);
-//	petal(0,0);
-	//glRotated(95.0, 0, 0, 1.0);
-	//petal(0,0);
 	glPopMatrix();
 	ofSetColor(0,0,0);
-	ofDrawBitmapString("degrees   : " + ofToString(counter), 800, 630);
-	ofDrawBitmapString("frame rate: "+ofToString(ofGetFrameRate(), 2), 800,650);
+	//ofDrawBitmapString("degrees   : " + ofToString(counter), 800, 630);
+	//ofDrawBitmapString("frame rate: "+ofToString(ofGetFrameRate(), 2), 800,650);
 }
 
 //--------------------------------------------------------------
@@ -61,6 +67,7 @@ void testApp::keyReleased  (int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
+	rotation = (float)y;
 }
 
 //--------------------------------------------------------------
