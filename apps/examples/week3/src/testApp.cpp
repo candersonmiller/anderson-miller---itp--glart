@@ -21,17 +21,18 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+	
 	glTranslated(000,000, -1500);
 	glPushMatrix();
 
 	for(int j = 0; j < 5; j++){
-		glTranslated(0,120,0);
+		glTranslated(0,80,0);
 		for(int i = 0; i < 10; i++){
-			glRotated(cos(counter2 * pi) * 360, 1, 1, 1);
-			glTranslated(120,0,0);
+			glRotated(cos(counter2 * pi) * 360, 1, 0.5, 0.5);
+			glTranslated(80,0,0);
 			flower(0,0);
 		}
-		glTranslated(-1200,0,0);
+		glTranslated(-800,0,0);
 	}
 
 
