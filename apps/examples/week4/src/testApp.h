@@ -20,7 +20,10 @@ class testApp : public ofSimpleApp{
 		void mousePressed(int x, int y, int button);
 		void mouseReleased();
 		
-		
+	private:
+		float counter;
+		int snapImage;
+		ofImage myImage;
 };
 
 #endif
