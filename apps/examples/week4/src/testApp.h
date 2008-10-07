@@ -22,6 +22,7 @@ class testApp : public ofSimpleApp{
 		
 	private:
 		float counter;
+	float counter1;
 		int snapImage;
 		ofImage myImage;
 };
