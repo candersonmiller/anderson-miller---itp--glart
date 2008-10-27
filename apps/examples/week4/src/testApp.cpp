@@ -56,7 +56,7 @@ void testApp::draw(){
 	glColor3f(1,1,1);
 	float s1color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s1color);
-	glMaterialf(GL_FRONT, GL_EMISSION, 1.0f);
+	glMaterialf(GL_FRONT, GL_SHININESS, 1.0f);
 	glutSolidSphere(20, 50, 50);
 	
 	glPopMatrix();
