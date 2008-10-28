@@ -9,6 +9,7 @@ import sys
 import math
 import Image
 from numpy import *
+from pnoise import pnoise
 
 
 ####### To Do:
@@ -22,12 +23,11 @@ from numpy import *
 #       (done) sinewave()
 imagecounter = 1000
 counter = 0
-cloudsize = 15
+cloudsize = 16
 xrand = [cloudsize]
 yrand = [cloudsize]
 zrand = [cloudsize]
-
-period = 40
+period = 20
 
 for i in range(0, cloudsize):
 	xrand.append(0)
@@ -54,7 +54,7 @@ def drawSphere():
 	glColor3f(1,1,1)
 	s1color = ( 1.0, 1.0, 1.0, 1.0 )
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s1color)
-	glMaterialf(GL_FRONT, GL_SHININESS, 1)
+	glMaterialf(GL_FRONT, GL_SHININESS, 0.2)
 	glutSolidSphere(0.6,100,100)
 	#glPopMatrix()
 	
@@ -106,9 +106,11 @@ def DrawGLScene():
 	
 	#ambient scene light
 	glPushMatrix() #Push
-	glTranslated(5, 4, -2)
-	ambient = (0.55, 0.55, 0.55, 1.0)
-	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient)
+	glTranslated(5, 4, 4)
+	ambient = (0.55, 0.55, 0.55)
+	#ambient = (0.3, 0.3, 0.3)
+	#ambient = (0.1, 0.1, 0.1)
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient)
 	glPopMatrix() #Pop
 	
 	
@@ -127,25 +129,37 @@ def DrawGLScene():
 	
 	
 	position = (-5, 1,-10, 1)
-	specularLight = (0.7, 0.7, 0.7, 1)
-	glLightfv(GL_LIGHT2, GL_POSITION, position)
-	glLightfv(GL_LIGHT2, GL_SPECULAR, specularLight)
+	specularLight = (1.0, 1.0, 1.0, 1.0)
+	glLightfv(GL_LIGHT1, GL_POSITION, position)
+	glLightfv(GL_LIGHT1, GL_SPECULAR, specularLight)
 
 
 	#fill light
 	position1 = (3, -3,5, 1)
-	specularLight1 = (0.539, 0.777, 0.957, 0.4)
-	glLightfv(GL_LIGHT0, GL_POSITION, position1)
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight1)
+	specularLight1 = (0.539, 0.777, 0.957, 0.2)
+	glLightfv(GL_LIGHT2, GL_POSITION, position1)
+	glLightfv(GL_LIGHT2, GL_SPECULAR, specularLight1)
 
 
 
 
 	glEnable(GL_LIGHT0)
-	glEnable(GL_LIGHT1)
+	#glEnable(GL_LIGHT1)
 	glEnable(GL_LIGHT2)
 	
 	glLoadIdentity()			
+
+
+	glPushMatrix()
+	glTranslatef(0,-27,-12)
+	glColor3f(0,1,0)
+	s1color = ( 0.0, 1.0, 0.0, 1.0 )
+	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s1color)
+	glMaterialf(GL_FRONT, GL_SHININESS, 0.2)
+	glutSolidSphere(24,100,100)
+	glPopMatrix()
+
+
 
 	floatingpt = float(float(counter) / float(period))
 	
@@ -156,13 +170,15 @@ def DrawGLScene():
 	if( counter > period or counter == 0):   #time to make a new cloud
 		#this is how you make a new cloud
 		for i in range(0, cloudsize):
-			xrand[i] = random.uniform(-0.5, 0.5)
-			yrand[i] = random.uniform(-0.5, 0.5)
-			zrand[i] = random.uniform(-0.5, 0.5)
+			xrand[i] = random.uniform(-.5, .5)
+			yrand[i] = random.uniform(-.5, .5)
+			zrand[i] = random.uniform(-.5, .5)
+			
 		#delay(1)
 		counter = 1
 	else:
 		counter = counter + 0.03
+	
 
 	##this is how we draw clouds
 	glPushMatrix() #push
@@ -175,25 +191,35 @@ def DrawGLScene():
 		glPopMatrix()   #Pop
 	glPopMatrix() #pop
 
-	size = 640, 480
-	towrite = Image.new('RGB', size)
-	pixels = glReadPixels(0, 0, 640, 480, GL_RGB, GL_FLOAT)
-	#print pixels[0][0][0]
-	#print pixels[0][0][1]
-	#print pixels[0][0][2]
-	imagecounter = imagecounter + 1
-	
-	for x in range(640):
-		for y in range(480):
-			red = int(pixels[x][y][0] * 255)
-			green = int(pixels[x][y][1] * 255)
-			blue = int(pixels[x][y][2] * 255)
 
-			towrite.putpixel((x,y),(red,green,blue))
-	outfile = 'frame00%d.jpg' % imagecounter
-	towrite.save(outfile, "JPEG")
+	write = 0
+	imagecounter = imagecounter + 1
+	#print imagecounter
+	if(write and imagecounter > 1120):
+		size = 640, 480
+		tempimage = Image.new('RGB', size, (0,0,0))
+		print "reading pixels"
+		pixels = glReadPixels(0, 0, 640, 480, GL_RGB, GL_FLOAT)
+		print "done reading pixels"
+		#print pixels[0][0][0]
+		#print pixels[0][0][1]
+		#print pixels[0][0][2]
+		
+		print "writing pixels to file"
+		pix = tempimage.load()
+		for x in range(640):
+			for y in range(480):
+				pix[x,y] = (int(pixels[x][y][0] * 255),int(pixels[x][y][1] * 255),int(pixels[x][y][2] * 255))
+		
+		towrite = Image.new('RGB', size)
+		towrite.putdata(pix)
+		print "done writing pixels"
+		outfile = 'frame00%d.jpg' % imagecounter
+
+		towrite.save(outfile, "JPEG")
+		print "done saving"
 	
-	
+
 	glutSwapBuffers()
 
 # The function called whenever a key is pressed. Note the use of Python tuples to pass in: (key, x, y)  
@@ -234,7 +260,7 @@ def main():
 	#glutDisplayFunc()
 	
 	# Uncomment this line to get full screen.
-	#glutFullScreen()
+	glutFullScreen()
 
 	# When we are doing nothing, redraw the scene.
 	glutIdleFunc(DrawGLScene)
@@ -247,7 +273,7 @@ def main():
 	glutKeyboardFunc(keyPressed)
 	
 	# Initialize our window. 
-	InitGL(640, 480)
+	InitGL(320, 240)
 
 	
 # Print message to console, and kick off the main to get it rolling.
