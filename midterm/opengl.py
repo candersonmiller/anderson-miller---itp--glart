@@ -9,6 +9,14 @@ import math
 from numpy import *
 
 
+## To Do:
+#  		Commit to Git Repository
+#  		Tweak Lighting
+#		Tweak Colors
+#		Sun
+#       Image file for frame
+#		Basic Rotation
+
 counter = 0
 cloudsize = 15
 xrand = [cloudsize]
@@ -144,7 +152,7 @@ def drawSphere():
 	
 # A general OpenGL initialization function.  Sets all of the initial parameters. 
 def InitGL(Width, Height):				# We call this right after our OpenGL window is created.
-    glClearColor(0.0, 0.0, 0.0, 0.0)	# This Will Clear The Background Color To Black
+    glClearColor(0.539, 0.777, 0.957, 1.0)	# This Will Clear The Background Color To Black
     glClearDepth(1.0)					# Enables Clearing Of The Depth Buffer
     glDepthFunc(GL_LESS)				# The Type Of Depth Test To Do
     glEnable(GL_DEPTH_TEST)				# Enables Depth Testing
@@ -172,9 +180,9 @@ def ReSizeGLScene(Width, Height):
 # The main drawing function. 
 def DrawGLScene():
 	global counter
-	global xrand
-	global yrand
-	global zrand
+	global xrand 	#array containing positions of all spheres (x values)
+	global yrand	#array containing positions of all spheres (y values)
+	global zrand	#array containing positions of all spheres (z values)
 	global cloudsize
 	global period
 	
@@ -186,28 +194,33 @@ def DrawGLScene():
 	glLoadIdentity()
 	
 	
+	#ambient scene light
 	glPushMatrix() #Push
-	
 	glTranslated(5, 4, -2)
-	ambient = (1.0, 1.0, 1.0)
+	ambient = (0.7, 0.7, 0.7, 1.0)
 	glLightfv(GL_LIGHT1, GL_AMBIENT, ambient)
-	
 	glPopMatrix() #Pop
 	
+
 	
-	
-	glPushMatrix()  #Push
-	
-	glTranslated(3, -3, 0)
-	position = (0, 0,-1, 1)
-	specularLight = (1, 1, 1, 1)
+	#sunlight
+	position = (-5, 1,-10, 1)
+	specularLight = (0.7, 0.7, 0.7, 1)
 	glLightfv(GL_LIGHT0, GL_POSITION, position)
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight)
-	
-	glPopMatrix() #Pop
-	
-	#glEnable(GL_LIGHT1)
+
+
+	#fill light
+	position1 = (3, -3,5, 1)
+	specularLight1 = (0.539, 0.777, 0.957, 0.4)
+	glLightfv(GL_LIGHT0, GL_POSITION, position1)
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight1)
+
+
+
+
 	glEnable(GL_LIGHT0)
+	glEnable(GL_LIGHT1)
 
 	
 	glLoadIdentity()			
@@ -215,8 +228,8 @@ def DrawGLScene():
 	floatingpt = float(float(counter) / float(period))
 	
 	#print "%.2f" % floatingpt
-	glTranslate(-4, 0, 0) #jokey coming off screen effect
-	glTranslatef(floatingpt * 10 , 0, 0) #flyin' by
+	glTranslate(-4.5, 0, 0) #jokey coming off screen effect
+	glTranslatef(floatingpt * 12 , 0, 0) #flyin' by
 	glTranslatef(-1.5,0.0,-6.0)				
 	if( counter > period or counter == 0):
 		for i in range(0, cloudsize):
@@ -276,7 +289,7 @@ def main():
 	#glutDisplayFunc()
 	
 	# Uncomment this line to get full screen.
-	# glutFullScreen()
+	glutFullScreen()
 
 	# When we are doing nothing, redraw the scene.
 	glutIdleFunc(DrawGLScene)
