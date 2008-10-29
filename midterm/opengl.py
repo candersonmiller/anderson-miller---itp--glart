@@ -3,13 +3,12 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+from datetime import datetime
 import random
 import os
 import sys
 import math
 import Image
-from numpy import *
-from pnoise import pnoise
 
 
 ####### To Do:
@@ -155,7 +154,7 @@ def DrawGLScene():
 	glColor3f(0,1,0)
 	s1color = ( 0.0, 1.0, 0.0, 1.0 )
 	glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, s1color)
-	glMaterialf(GL_FRONT, GL_SHININESS, 0.2)
+	#glMaterialf(GL_FRONT, GL_SHININESS, 0.2)
 	glutSolidSphere(24,100,100)
 	glPopMatrix()
 
@@ -164,10 +163,32 @@ def DrawGLScene():
 	floatingpt = float(float(counter) / float(period))
 	
 	#print "%.2f" % floatingpt
-	glTranslate(-4.5, 0, 0) #jokey coming off screen effect
+	glTranslate(-4.5, 0.5, 0) #jokey coming off screen effect
 	glTranslatef(floatingpt * 12 , math.sin((xrand[0] + floatingpt)*5) * 1, 0) #flyin' by
 	glTranslatef(-1.5,0.0,-6.0)				
 	if( counter > period or counter == 0):   #time to make a new cloud
+		#also going to change color based on time:
+		#glClearColor(0.539, 0.777, 0.957, 1.0)	# This Will Clear The Background Color To Black
+		timeItIs = datetime.now()
+		seconds = (((timeItIs.hour * 60) + timeItIs.minute) * 60) + timeItIs.second
+		totalseconds = 86400
+		rdiff = 0.532
+		gdiff = 0.6908
+		bdiff = 0.812
+		rstart = 0.539
+		gstart = 0.777
+		bstart = 0.957
+		if(seconds < (totalseconds/2)):
+			rCurr = rstart + rdiff - (float(seconds/(totalseconds/2)) * rdiff) 
+			gCurr = gstart + gdiff - (float(seconds/(totalseconds/2)) * gdiff)
+			bCurr = bstart + bdiff - (float(seconds/(totalseconds/2)) * bdiff)
+			glClearColor(rCurr, gCurr, bCurr, 1.0)
+		else:
+			rCurr = rstart - (float(seconds/(totalseconds/2)) * rdiff) 
+			gCurr = gstart - (float(seconds/(totalseconds/2)) * gdiff)
+			bCurr = bstart - (float(seconds/(totalseconds/2)) * bdiff)
+			glClearColor(rCurr, gCurr, bCurr, 1.0)
+		
 		#this is how you make a new cloud
 		for i in range(0, cloudsize):
 			xrand[i] = random.uniform(-.5, .5)
@@ -196,7 +217,7 @@ def DrawGLScene():
 	imagecounter = imagecounter + 1
 	#print imagecounter
 	if(write and imagecounter > 1120):
-		size = 640, 480
+		size = 1440, 480
 		tempimage = Image.new('RGB', size, (0,0,0))
 		print "reading pixels"
 		pixels = glReadPixels(0, 0, 640, 480, GL_RGB, GL_FLOAT)
@@ -243,7 +264,7 @@ def main():
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
 	
 	# get a 640 x 480 window 
-	glutInitWindowSize(640, 480)
+	glutInitWindowSize(1440, 900)
 	
 	# the window starts at the upper left corner of the screen 
 	glutInitWindowPosition(0, 0)
@@ -273,7 +294,7 @@ def main():
 	glutKeyboardFunc(keyPressed)
 	
 	# Initialize our window. 
-	InitGL(320, 240)
+	InitGL(1440, 900)
 
 	
 # Print message to console, and kick off the main to get it rolling.
