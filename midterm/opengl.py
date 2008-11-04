@@ -26,7 +26,7 @@ cloudsize = 16
 xrand = [cloudsize]
 yrand = [cloudsize]
 zrand = [cloudsize]
-period = 20
+period = 50
 
 for i in range(0, cloudsize):
 	xrand.append(0)
@@ -178,16 +178,16 @@ def DrawGLScene():
 		rstart = 0.539
 		gstart = 0.777
 		bstart = 0.957
-		if(seconds < (totalseconds/2)):
-			rCurr = rstart + rdiff - (float(seconds/(totalseconds/2)) * rdiff) 
-			gCurr = gstart + gdiff - (float(seconds/(totalseconds/2)) * gdiff)
-			bCurr = bstart + bdiff - (float(seconds/(totalseconds/2)) * bdiff)
-			glClearColor(rCurr, gCurr, bCurr, 1.0)
-		else:
-			rCurr = rstart - (float(seconds/(totalseconds/2)) * rdiff) 
-			gCurr = gstart - (float(seconds/(totalseconds/2)) * gdiff)
-			bCurr = bstart - (float(seconds/(totalseconds/2)) * bdiff)
-			glClearColor(rCurr, gCurr, bCurr, 1.0)
+		#if(seconds < (totalseconds/2)):
+		#	rCurr = rstart + rdiff - (float(seconds/(totalseconds/2)) * rdiff) 
+		#	gCurr = gstart + gdiff - (float(seconds/(totalseconds/2)) * gdiff)
+		#	bCurr = bstart + bdiff - (float(seconds/(totalseconds/2)) * bdiff)
+		#	glClearColor(rCurr, gCurr, bCurr, 1.0)
+		#else:
+		#	rCurr = rstart - (float(seconds/(totalseconds/2)) * rdiff) 
+		#	gCurr = gstart - (float(seconds/(totalseconds/2)) * gdiff)
+		#	bCurr = bstart - (float(seconds/(totalseconds/2)) * bdiff)
+		#	glClearColor(rCurr, gCurr, bCurr, 1.0)
 		
 		#this is how you make a new cloud
 		for i in range(0, cloudsize):
